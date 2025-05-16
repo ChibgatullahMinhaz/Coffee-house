@@ -16,12 +16,39 @@
 html {
   scroll-behavior: smooth;
 }
-
+#minHight{
+  min-height: calc(100vh - 500px);
+}
 #navbar {
   background-image: url("../src/assets/more/15.jpg");
+  background-repeat: no-repeat;
   color: beige;
 }
 #navError {
   background-image: url("../src/assets/more/15.jpg");
+  background-repeat: no-repeat;
+  color: beige;
+}
+
+.active{
+  color: whitesmoke;
+}
+#hero{
+  background-image: url('../src/assets/more/3.png');
+}
+
+/* footer */
+footer{
+  background-image: url('../src/assets/more/13.jpg');
+  background-repeat: no-repeat;
+}
+
+.textShadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  font-size: 1.5rem;
+}
+.copyRight{
+   background-image: url('../src/assets/more/24.jpg');
+  background-repeat: no-repeat;
   color: beige;
 }

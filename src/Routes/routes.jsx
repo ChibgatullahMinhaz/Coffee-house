@@ -3,19 +3,18 @@ import ErrorLaoyouts from "../Layouts/ErrorLaoyouts";
 import MainLayouts from "../Layouts/MainLayouts";
 import Home from "../Pages/Home";
 export const routes = createBrowserRouter([
-    {
-        path: "/",
-        element: <MainLayouts></MainLayouts>,
-        children: [
-            {
-                path: "/",
-                element: <Home></Home>
-            }
-        ]
-    }
-    ,
-    {
-        path: "*",
-        element: <ErrorLaoyouts></ErrorLaoyouts>
-    }
-])
+  {
+    path: "/",
+    element: <MainLayouts></MainLayouts>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <ErrorLaoyouts></ErrorLaoyouts>,
+  },
+]);
