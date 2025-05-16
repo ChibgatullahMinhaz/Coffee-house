@@ -33,7 +33,11 @@ html {
   background-repeat: no-repeat;
   color: beige;
 }
-
+#login{
+  background-image: url('/src/assets/more/4.png');
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
 .active {
   color: whitesmoke;
 }

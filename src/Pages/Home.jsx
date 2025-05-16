@@ -8,6 +8,7 @@ import FollowUsSection from '../components/FollowUsSection';
 const Home = () => {
     return (
         <>
+        {/* <ScrollButton></ScrollButton> */}
            <Hero></Hero>
            <SubHeader></SubHeader>
            <OurProductSection></OurProductSection>

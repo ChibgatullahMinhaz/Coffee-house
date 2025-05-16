@@ -70,7 +70,7 @@ const Navbar = () => {
             Login
           </button>
         </Link>
-        <Link to={`singUp`}>
+        <Link to={`signUp`}>
           <button className=" btn bg-[#E3B577] cursor-pointer text-white">
             SingUp
           </button>
