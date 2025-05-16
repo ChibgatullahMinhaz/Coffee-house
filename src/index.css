@@ -1,4 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Rancho&display=swap");
 @import "tailwindcss";
 @plugin "daisyui" {
   themes: light --default;
+}
+
+:root {
+  --btnColor: #e3b577;
+  --fontFamily: "Rancho", cursive;
+}
+
+* {
+  font-family: var(--fontFamily);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#navbar {
+  background-image: url("../src/assets/more/15.jpg");
+  color: beige;
+}
+#navError {
+  background-image: url("../src/assets/more/15.jpg");
+  color: beige;
 }
