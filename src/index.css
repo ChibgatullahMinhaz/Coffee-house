@@ -12,11 +12,14 @@
 * {
   font-family: var(--fontFamily);
 }
-
+.textShadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  font-size: 1.5rem;
+}
 html {
   scroll-behavior: smooth;
 }
-#minHight{
+#minHight {
   min-height: calc(100vh - 500px);
 }
 #navbar {
@@ -31,25 +34,25 @@ html {
   color: beige;
 }
 
-.active{
+.active {
   color: whitesmoke;
 }
-#hero{
-  background-image: url('../src/assets/more/3.png');
+#hero {
+  background-image: url("../src/assets/more/3.png");
 }
-
+#productSection {
+  background-image: url("../src/assets/more/1.png");
+  background-repeat: no-repeat;
+}
 /* footer */
-footer{
-  background-image: url('../src/assets/more/13.jpg');
+footer {
+  background-image: url("../src/assets/more/13.jpg");
   background-repeat: no-repeat;
 }
 
-.textShadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  font-size: 1.5rem;
-}
-.copyRight{
-   background-image: url('../src/assets/more/24.jpg');
+
+.copyRight {
+  background-image: url("../src/assets/more/24.jpg");
   background-repeat: no-repeat;
   color: beige;
 }

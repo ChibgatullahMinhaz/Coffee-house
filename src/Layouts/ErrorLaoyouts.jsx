@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ErrorNavbar from "../components/ErrorNavbar";
 import { IoMdArrowBack } from "react-icons/io";
 import { Link } from "react-router";
@@ -7,6 +7,12 @@ import { motion } from "framer-motion";
 import ErrorImage from "../assets/404/404.gif";
 import ScrollButton from "../components/UI/ScrollButton";
 const ErrorLaoyouts = () => {
+    useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    },[])
   return (
     <>
     <ScrollButton></ScrollButton>
