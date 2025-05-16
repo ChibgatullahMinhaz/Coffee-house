@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const SubHeader = () => {
   return (
     <div className="bg-[#ECEAE3] overflow-hidden">
-      <div className="max-w-9/12 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+      <div className="max-w-9/12 mx-auto grid grid-cols-1 justify-center items-center md:grid-cols-3 lg:grid-cols-4 ">
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -34,10 +34,10 @@ const SubHeader = () => {
         >
           <img
             src={Quality}
-alt="We served the coffee to you maintaining the best quality"          />
+            alt="We served the coffee to you maintaining the best quality"
+          />
           <h1 className="text-2xl">High Quality</h1>
-          <p>
-We served the coffee to you maintaining the best quality          </p>
+          <p>We served the coffee to you maintaining the best quality </p>
         </motion.div>
         <motion.div
           initial={{ x: 100, opacity: 0 }}
@@ -48,10 +48,12 @@ We served the coffee to you maintaining the best quality          </p>
         >
           <img
             src={Grades}
-alt="The coffee is made of the green coffee beans which you will love"          />
+            alt="The coffee is made of the green coffee beans which you will love"
+          />
           <h1 className="text-2xl">Pure Grades</h1>
           <p>
-The coffee is made of the green coffee beans which you will love          </p>
+            The coffee is made of the green coffee beans which you will love{" "}
+          </p>
         </motion.div>
         <motion.div
           initial={{ x: 100, opacity: 0 }}
@@ -62,10 +64,10 @@ The coffee is made of the green coffee beans which you will love          </p>
         >
           <img
             src={Rosting}
-alt="Your coffee is brewed by first roasting the green coffee beans"          />
+            alt="Your coffee is brewed by first roasting the green coffee beans"
+          />
           <h1 className="text-2xl">Proper Roasting</h1>
-          <p>
-Your coffee is brewed by first roasting the green coffee beans          </p>
+          <p>Your coffee is brewed by first roasting the green coffee beans </p>
         </motion.div>
       </div>
     </div>

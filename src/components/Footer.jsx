@@ -19,7 +19,7 @@ const Footer = () => {
       viewport={{ once: false, amount: 0.1 }}
       className="overflow-hidden"
     >
-      <motion.div className="p-4 md:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-x-9 relative overflow-hidden">
+      <motion.div className="p-4 md:p-8 lg:p-10 grid grid-cols-1 md:grid-cols-2 items-center lg:gap-x-9 relative overflow-hidden">
         <div>
           <img src={Logo} alt="footer logo" className="w-10 h-10" />
           <Link to={`/`}>
