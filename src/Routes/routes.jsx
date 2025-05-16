@@ -6,6 +6,7 @@ import AddCoffee from "../components/AddCoffee";
 import Signin from "../components/Auth/Signin";
 import SignUp from "../components/Auth/SignUp";
 import UpdateCoffee from "../components/UpdateCoffee";
+import CoffeeDetails from "../components/CoffeeDetails";
 
 
 export const routes = createBrowserRouter([
@@ -24,6 +25,10 @@ export const routes = createBrowserRouter([
       {
         path: 'updateCoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>
+      },
+      {
+        path: 'coffeeDetails/:id',
+        element: <CoffeeDetails></CoffeeDetails>
       }
       ,
       {
