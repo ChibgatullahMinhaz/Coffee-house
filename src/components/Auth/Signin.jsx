@@ -8,8 +8,7 @@ const Signin = () => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const {email, password} = Object.fromEntries(formData.entries());
-    
+    const { email, password } = Object.fromEntries(formData.entries());
   };
 
   const handleShowPassword = () => {
@@ -19,7 +18,7 @@ const Signin = () => {
     <motion.div
       initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: 'backIn' }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       viewport={{ once: false, amount: 0 }}
       id="login"
       className="w-full max-w-md mx-auto my-5 bg-[#F4F3F0] rounded-box p-8 space-y-3 rounded-x"
@@ -92,7 +91,7 @@ const Signin = () => {
       <p className="text-lg text-center sm:px-6">
         Don't have an account?
         <Link
-          to={`/signUp`}
+          to="/signUp"
           rel="noopener noreferrer"
           className="underline link-accent text-blue-600"
         >

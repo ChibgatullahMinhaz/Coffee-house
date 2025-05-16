@@ -9,7 +9,9 @@ const SignUp = () => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const { email, password, ...remainingInfo } = Object.fromEntries(formData.entries());
+    const { email, password, ...remainingInfo } = Object.fromEntries(
+      formData.entries()
+    );
     console.log(email, password, remainingInfo);
   };
 
@@ -20,9 +22,9 @@ const SignUp = () => {
     <motion.div
       initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "backIn" }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       viewport={{ once: false, amount: 0 }}
-      id="login"
+      id="create"
       className="w-full max-w-md mx-auto my-5 bg-[#F4F3F0] rounded-box p-8 space-y-3 rounded-x"
     >
       <h1 className="text-2xl font-bold text-center">Create An Account</h1>
@@ -59,8 +61,8 @@ const SignUp = () => {
           <input
             type="text"
             required
-            name="photoUrl"
-            placeholder="Enter Your photoUrl"
+            name="photo"
+            placeholder="Enter Your photo URL"
             className="w-full px-4 py-3 rounded-md bg-white focus:outline-[var(--btnColor)]"
           />
         </div>
@@ -90,15 +92,21 @@ const SignUp = () => {
           </div>
         </div>
         {/* checkbox */}
-          <label className="label">
-            <input type="checkbox" name="terms" defaultChecked className="checkbox" />
-            Agree with out <span className="link text-blue-600">Terms</span> & Conditions
-          </label>
+        <label className="label">
+          <input
+            type="checkbox"
+            name="terms"
+            defaultChecked
+            className="checkbox"
+          />
+          Agree with our <span className="link text-blue-600">Terms</span> &
+          Conditions
+        </label>
         <button
           type="submit"
           className="block w-full bg-[var(--btnColor)] cursor-pointer p-3 text-center rounded-sm"
         >
-          Sign in
+          Create Account
         </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
@@ -121,11 +129,7 @@ const SignUp = () => {
       </div>
       <p className="text-lg text-center sm:px-6">
         Your have an account?
-        <Link
-          to={`/signUp`}
-          rel="noopener noreferrer"
-          className="underline link-accent text-blue-600"
-        >
+        <Link to="/signin" className="underline link-accent text-blue-600">
           Signin
         </Link>
       </p>

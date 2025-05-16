@@ -16,6 +16,9 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   font-size: 1.5rem;
 }
+.hTextShadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
 html {
   scroll-behavior: smooth;
 }
@@ -33,17 +36,28 @@ html {
   background-repeat: no-repeat;
   color: beige;
 }
-#login{
-  background-image: url('/src/assets/more/4.png');
+#login {
+  background-image: url("/src/assets/more/4.png");
   background-repeat: no-repeat;
   background-position: bottom left;
+}
+#create {
+  background-image: url("/src/assets/more/5.png");
+  background-repeat: no-repeat;
+  background-position: right bottom;
 }
 .active {
   color: whitesmoke;
 }
 #hero {
-  background-image: url("../src/assets/more/3.png");
+  background-image: url("/src/assets/more/3.png");
+  background-repeat: no-repeat;
 }
+#addCoffee {
+  background-image: url("/src/assets/more/11.png");
+  background-repeat: no-repeat;
+}
+
 #productSection {
   background-image: url("../src/assets/more/1.png");
   background-repeat: no-repeat;
@@ -53,7 +67,6 @@ footer {
   background-image: url("../src/assets/more/13.jpg");
   background-repeat: no-repeat;
 }
-
 
 .copyRight {
   background-image: url("../src/assets/more/24.jpg");

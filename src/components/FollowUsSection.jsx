@@ -36,7 +36,7 @@ const FollowUsSection = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
         viewport={{ once: false, amount: 0 }}
-        className="text-shadow-2xs text-shadow-amber-300 text-[#331A15] text-3xl md:text-4xl lg:text-5xl"
+        className="hTextShadow text-[#331A15] text-3xl md:text-4xl lg:text-5xl"
       >
         Follow on Instagram
       </motion.h1>
