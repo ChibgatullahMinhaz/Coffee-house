@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../components/Footer";
+import ScrollButton from "../components/UI/ScrollButton";
 
 const MainLaouts = () => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    console.log('scroll top');
+  }, []);
   return (
     <>
-      <header className="sticky top-0">
+    <ScrollButton></ScrollButton>
+      <header >
         <nav>
           <Navbar></Navbar>
         </nav>

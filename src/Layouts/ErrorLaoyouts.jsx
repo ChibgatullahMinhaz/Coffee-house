@@ -5,9 +5,11 @@ import { Link } from "react-router";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import ErrorImage from "../assets/404/404.gif";
+import ScrollButton from "../components/UI/ScrollButton";
 const ErrorLaoyouts = () => {
   return (
     <>
+    <ScrollButton></ScrollButton>
       <header>
         <nav>
           <ErrorNavbar></ErrorNavbar>
