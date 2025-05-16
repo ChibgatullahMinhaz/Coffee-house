@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { IoMdArrowBack } from "react-icons/io";
 import BackButton from "./UI/BackButton";
-const AddCoffee = () => {
+const UpdateCoffee = () => {
   return (
     <div id="addCoffee">
       <div className="max-w-4xl mx-auto my-5 md:my-9 text-center">
@@ -18,7 +18,7 @@ const AddCoffee = () => {
               viewport={{ once: false, amount: 0 }}
               className="hTextShadow text-[#331A15] text-3xl md:text-4xl lg:text-5xl"
             >
-              Add New Coffee
+              Update Existing Coffee Details
             </motion.h1>
 
             <motion.p
@@ -26,14 +26,15 @@ const AddCoffee = () => {
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
               viewport={{ once: false, amount: 0 }}
-              className="text-[#1B1A1A] justify-center my-3"
+              className="text-[#1B1A1A] justify-center"
             >
-              You're just a few steps away from adding your next signature
-              coffee. Share the details — the origin, the roast, the flavor
-              notes — and bring your blend to life. Whether it’s a bold
-              espresso, a smooth latte roast, or a seasonal special, every entry
-              adds richness to the journey. Let your coffee tell its story — and
-              let your customers fall in love, one cup at a time.
+              Time to refresh and refine. Use the form below to update this
+              coffee’s details — from its name and origin to tasting notes and
+              availability. Whether you’re tweaking the roast profile or
+              rebranding a bestseller, every update helps your customers
+              experience your coffee at its best. Keep it current. Keep it
+              crafted. Let every change reflect your passion for the perfect
+              brew.
             </motion.p>
 
             {/* add coffee form */}
@@ -160,7 +161,7 @@ const AddCoffee = () => {
                 type="submit"
                 className="btn btn-block bg-[var(--btnColor)]"
               >
-                Add Coffee
+                Update Coffee Details
               </button>
             </form>
           </div>
@@ -170,4 +171,4 @@ const AddCoffee = () => {
   );
 };
 
-export default AddCoffee;
+export default UpdateCoffee;

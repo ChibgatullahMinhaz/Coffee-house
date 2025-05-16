@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import ErrorImage from "../assets/404/404.gif";
 import ScrollButton from "../components/UI/ScrollButton";
+import BackButton from "../components/UI/BackButton";
 const ErrorLaoyouts = () => {
     useEffect(()=>{
         window.scrollTo({
@@ -23,17 +24,7 @@ const ErrorLaoyouts = () => {
       </header>
       <main className="mt-10">
         <div className="flex justify-center items-center">
-          <Link to={`/`}>
-            <motion.button
-              initial={{ x: 200, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.9, ease: "easeIn" }}
-              className="text-center cursor-pointer text-xl text-shadow-2xs flex items-center"
-            >
-              <IoMdArrowBack />
-              Back To Home
-            </motion.button>
-          </Link>
+         <BackButton></BackButton>
         </div>
 
         <motion.div

@@ -5,6 +5,7 @@ import Home from "../Pages/Home";
 import AddCoffee from "../components/AddCoffee";
 import Signin from "../components/Auth/Signin";
 import SignUp from "../components/Auth/SignUp";
+import UpdateCoffee from "../components/UpdateCoffee";
 
 
 export const routes = createBrowserRouter([
@@ -19,6 +20,10 @@ export const routes = createBrowserRouter([
       {
         path: 'addCoffee',
         element: <AddCoffee></AddCoffee>
+      },
+      {
+        path: 'updateCoffee/:id',
+        element: <UpdateCoffee></UpdateCoffee>
       }
       ,
       {
