@@ -1,63 +1,66 @@
-import React from "react";
+import React, { useContext } from "react";
 import CoffeeImg from "../../assets/5.png";
 import { FaEye, FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Context/AuthContext";
 
-
-const CoffeeCard = ({ coffee,coffees, setCoffees }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { price, name, _id, photo, barista } = coffee;
-
-
-const handleDelete = (id) => {
-  const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: "btn btn-success",
-      cancelButton: "btn btn-danger",
-    },
-    buttonsStyling: false,
-  });
-
-  swalWithBootstrapButtons
-    .fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
-      reverseButtons: true,
-    })
-    .then((result) => {
-      if (result.isConfirmed) {
-      
-        fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount) {
-              swalWithBootstrapButtons.fire({
-                title: "Deleted!",
-                text: "Your coffee has been deleted.",
-                icon: "success",
-              });
-              const remainingCoffee = coffees.filter(cof => cof._id !== id)
-              setCoffees(remainingCoffee)
-            }
-          });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithBootstrapButtons.fire({
-          title: "Cancelled",
-          text: "Your coffee is safe 🙂",
-          icon: "error",
-        });
-      }
+  const {user }= useContext(AuthContext)
+const navigate = useNavigate()
+  const handleDelete = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
     });
-};
+
+  if (user) {
+      swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
+            method: "DELETE",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.deletedCount) {
+                swalWithBootstrapButtons.fire({
+                  title: "Deleted!",
+                  text: "Your coffee has been deleted.",
+                  icon: "success",
+                });
+                const remainingCoffee = coffees.filter((cof) => cof._id !== id);
+                setCoffees(remainingCoffee);
+              }
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your coffee is safe 🙂",
+            icon: "error",
+          });
+        }
+      });
+  }else{
+    navigate('/signin')
+  }
+  };
 
   return (
     <motion.div
@@ -67,14 +70,13 @@ const handleDelete = (id) => {
       viewport={{ once: false, amount: 0 }}
       className="bg-[#F5F4F1] rounded-box grid grid-cols-1  p-3 justify-center self-start sm:grid-cols-4 items-center"
     >
-        <div >
-
-      <img
-        src={photo || CoffeeImg}
-        alt={name || "Coffee Image"}
-        className=" w-sm mx-auto col-span-1"
-      />
-        </div>
+      <div>
+        <img
+          src={photo || CoffeeImg}
+          alt={name || "Coffee Image"}
+          className=" w-sm mx-auto col-span-1"
+        />
+      </div>
       <div className="p-4 text-center sm:text-left col-span-2">
         <h2>
           <span className="text-xl font-semibold">Name:</span> {name}

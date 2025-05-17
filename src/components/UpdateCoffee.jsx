@@ -1,5 +1,5 @@
 import React from "react";
-import { Link,  useLoaderData, useNavigate, useParams } from "react-router";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router";
 import { motion } from "framer-motion";
 import BackButton from "./UI/BackButton";
 import Swal from "sweetalert2";
@@ -18,41 +18,53 @@ const UpdateCoffee = () => {
     _id,
   } = useLoaderData();
   const { id } = useParams();
-const navigate = useNavigate();
-
-
+  const navigate = useNavigate();
 
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const updatedDoc = Object.fromEntries(formData.entries());
-    console.log(updatedDoc);
-    fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedDoc),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Coffee has been Added",
-            showConfirmButton: false,
-            timer: 1500,
+
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(updatedDoc),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.modifiedCount) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Coffee has been Added",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+              form.reset();
+            } else {
+              toast.warn("Please Change something!");
+            }
           });
-         navigate('/')
-          form.reset();
-        }else{
-          toast.warn('Please Change something!')
-        }
-      });
+        Swal.fire("Saved!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   };
+
+  
   return (
     <div id="addCoffee" className="overflow-hidden">
       <div className="max-w-4xl mx-auto my-5 md:my-9 text-center">

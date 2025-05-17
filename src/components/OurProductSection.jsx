@@ -4,6 +4,7 @@ import Icon from "../assets/icons/1.png";
 import { Link } from "react-router";
 import { CoffeeContext } from "../Context/CoffeeContext";
 import CoffeeCard from "./UI/CoffeeCard";
+import Loader from "./UI/Loader";
 const OurProductSection = () => {
   const { allCoffees } = useContext(CoffeeContext);
   const [coffees, setCoffees] = useState(allCoffees);
@@ -29,6 +30,7 @@ const OurProductSection = () => {
         >
           Our Popular Products
         </motion.h1>
+       
         <Link to={"addCoffee"}>
           <motion.button
             initial={{ y: 100, opacity: 0 }}
@@ -44,15 +46,14 @@ const OurProductSection = () => {
 
         {/* showing coffees */}
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 max-w-11/12 mx-auto py-6 space-y-4 lg:gap-4">
-          {
-            coffees.map((coffee, idx) => (
-              <CoffeeCard
-                key={idx}
-                setCoffees={setCoffees}
-                coffee={coffee}
+          {allCoffees.map((coffee, idx) => (
+            <CoffeeCard
+              key={idx}
+              setCoffees={setCoffees}
+              coffee={coffee}
               coffees={coffees}
-              ></CoffeeCard>
-            ))}
+            ></CoffeeCard>
+          ))}
         </div>
       </div>
     </div>

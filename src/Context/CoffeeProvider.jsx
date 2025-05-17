@@ -21,11 +21,12 @@ const CoffeeProvider = ({ children }) => {
       }
     };
     loadCoffees();
-  }, []);
+  }, [loading]);
 
   const coffee = {
     allCoffees,
     setAllCoffees,
+    loading
   };
 
   return (

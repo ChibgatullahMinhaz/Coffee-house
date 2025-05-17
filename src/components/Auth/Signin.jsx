@@ -4,6 +4,8 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../Context/AuthContext";
 import { GoogleAuthProvider } from "firebase/auth";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -20,23 +22,29 @@ const Signin = () => {
     const { email, password } = Object.fromEntries(formData.entries());
     userLogin(email, password)
       .then((result) => {
-        // toast.success("login successful");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(location?.state || "/");
       })
       .catch((error) => {
         const errorcode = error.code;
         if (errorcode == "auth/user-not-found") {
-          // toast.warning("Invalid User ! please Create An Account");
+          toast.warning("Invalid User ! please Create An Account");
         } else if (errorcode === "auth/wrong-password") {
-          // toast.warning("Wrong Password");
+          toast.warning("Wrong Password");
         } else if (errorcode === "auth/invalid-credential") {
-          // toast.warn("Invalid email or password");
+          toast.warn("Invalid email or password");
         }
       });
   };
 
   const handleReset = () => {
-    navigate("/resetPassword", { state: { email } });
+    navigate("/forgetPassword", { state: { email } });
   };
 
   // login with google
@@ -44,20 +52,17 @@ const Signin = () => {
   const handleLoginWithGoogle = () => {
     creteUserWithGoogle(provider)
       .then((result) => {
-
-
-        fetch('https://coffee-server-lyart.vercel.app/thirdPartyUsers',{
-          method: 'POST',
+        fetch("https://coffee-server-lyart.vercel.app/thirdPartyUsers", {
+          method: "POST",
           headers: {
-            'content-type': 'application/json'
-          }
-          ,
-          body:JSON.stringify(result)
-        }).then(res => res.json())
-        .then(user => {
-          console.log(user);
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(result),
         })
-
+          .then((res) => res.json())
+          .then((user) => {
+            console.log(user);
+          });
 
         navigate(location?.state || "/");
       })
@@ -88,7 +93,7 @@ const Signin = () => {
             Email
           </label>
           <input
-          ref={emailRef}
+            ref={emailRef}
             type="email"
             required
             name="email"
@@ -115,8 +120,8 @@ const Signin = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
           </div>
-          <div className="flex justify-end text-xs">
-            <Link to={`/resetPassword`} rel="noopener noreferrer">
+          <div onClick={handleReset} className="flex justify-end text-xs">
+            <Link to={`/forgetPassword`} rel="noopener noreferrer">
               Forgot Password?
             </Link>
           </div>
@@ -136,7 +141,11 @@ const Signin = () => {
         <div className="flex-1 h-px sm:w-16 "></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button onClick={handleLoginWithGoogle} aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button
+          onClick={handleLoginWithGoogle}
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
