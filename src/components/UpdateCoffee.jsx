@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, useLoaderData, useParams } from "react-router";
+import { Link,  useLoaderData, useNavigate, useParams } from "react-router";
 import { motion } from "framer-motion";
-import { IoMdArrowBack } from "react-icons/io";
 import BackButton from "./UI/BackButton";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 const UpdateCoffee = () => {
   const {
     barista,
@@ -17,8 +17,11 @@ const UpdateCoffee = () => {
     taste,
     _id,
   } = useLoaderData();
-const {id} = useParams()
-console.log(id);
+  const { id } = useParams();
+const navigate = useNavigate();
+
+
+
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -43,7 +46,10 @@ console.log(id);
             showConfirmButton: false,
             timer: 1500,
           });
+         navigate('/')
           form.reset();
+        }else{
+          toast.warn('Please Change something!')
         }
       });
   };

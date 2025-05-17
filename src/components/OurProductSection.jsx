@@ -43,7 +43,6 @@ const OurProductSection = () => {
         </Link>
 
         {/* showing coffees */}
-        <p>{coffees.length}</p>
         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 max-w-11/12 mx-auto py-6 space-y-4 lg:gap-4">
           {
             coffees.map((coffee, idx) => (
@@ -51,6 +50,7 @@ const OurProductSection = () => {
                 key={idx}
                 setCoffees={setCoffees}
                 coffee={coffee}
+              coffees={coffees}
               ></CoffeeCard>
             ))}
         </div>
