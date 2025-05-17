@@ -209,12 +209,15 @@ const AddCoffee = () => {
                   Photo Url
                 </label>
                 <input
-                  type="text"
-                  required
+                  type="url"
+                  placeholder="https://Enter Your Photo URL"
+                  defaultValue="https://Enter Your Photo URL"
+                  pattern="^(https?://)?([a-zA-Z0-9]([a-zA-Z0-9\-].*[a-zA-Z0-9])?\.)+[a-zA-Z].*$"
+                  title="Must be valid URL"
                   name="photo"
-                  placeholder="Enter Your Photo URL"
                   className="w-full px-4 py-3 rounded-md bg-white focus:outline-[var(--btnColor)]"
                 />
+                <p className="validator-hint">Must be valid URL</p>
               </motion.div>
 
               <button

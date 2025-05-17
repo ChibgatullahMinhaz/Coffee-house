@@ -21,7 +21,6 @@ const CoffeeProvider = ({children}) => {
     loadCoffees();
   }, []);
 
-
   if (loading) {
     return 'Coffee Loading......'
   }

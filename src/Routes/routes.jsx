@@ -8,7 +8,6 @@ import SignUp from "../components/Auth/SignUp";
 import UpdateCoffee from "../components/UpdateCoffee";
 import CoffeeDetails from "../components/CoffeeDetails";
 
-
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -19,27 +18,27 @@ export const routes = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: 'addCoffee',
-        element: <AddCoffee></AddCoffee>
+        path: "addCoffee",
+        element: <AddCoffee></AddCoffee>,
       },
       {
-        path: 'updateCoffee/:id',
-        element: <UpdateCoffee></UpdateCoffee>
+        path: "updateCoffee/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:7000/coffees/${params.id}`),
+        element: <UpdateCoffee></UpdateCoffee>,
       },
       {
-        path: 'coffeeDetails/:id',
-        element: <CoffeeDetails></CoffeeDetails>
-      }
-      ,
+        path: "coffeeDetails/:id",
+        element: <CoffeeDetails></CoffeeDetails>,
+      },
       {
-        path: 'signin',
-        element: <Signin></Signin>
-      }
-      ,
+        path: "signin",
+        element: <Signin></Signin>,
+      },
       {
-        path: 'signUp',
-        element: <SignUp></SignUp>
-      }
+        path: "signUp",
+        element: <SignUp></SignUp>,
+      },
     ],
   },
   {

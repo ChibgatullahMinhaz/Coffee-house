@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import Icon from "../assets/icons/1.png";
 import { Link } from "react-router";
 import { CoffeeContext } from "../Context/CoffeeContext";
+import CoffeeCard from "./UI/CoffeeCard";
 const OurProductSection = () => {
   const { allCoffees } = useContext(CoffeeContext);
   const [coffees, setCoffees] = useState(allCoffees);
-console.log(coffees);
+
   return (
-    <div id="productSection" className="my-16 ">
+    <div id="productSection" className="my-16  ">
       <div className="max-w-11/12  mx-auto text-center py-6 md:py-16">
         <motion.p
           initial={{ x: -70, opacity: 0 }}
@@ -42,7 +43,17 @@ console.log(coffees);
         </Link>
 
         {/* showing coffees */}
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2"></div>
+        <p>{coffees.length}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 max-w-11/12 mx-auto py-6 space-y-4 lg:gap-4">
+          {
+            coffees.map((coffee, idx) => (
+              <CoffeeCard
+                key={idx}
+                setCoffees={setCoffees}
+                coffee={coffee}
+              ></CoffeeCard>
+            ))}
+        </div>
       </div>
     </div>
   );
