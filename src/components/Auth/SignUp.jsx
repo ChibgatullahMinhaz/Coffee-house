@@ -149,7 +149,6 @@ const SignUp = () => {
           </label>
           <input
             type="text"
-            required
             name="photo"
             placeholder="Enter Your photo URL"
             className="w-full px-4 py-3 rounded-md bg-white focus:outline-[var(--btnColor)]"
