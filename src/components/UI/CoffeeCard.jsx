@@ -10,8 +10,8 @@ import { AuthContext } from "../../Context/AuthContext";
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { price, name, _id, photo, barista } = coffee;
-  const {user }= useContext(AuthContext)
-const navigate = useNavigate()
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleDelete = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -21,45 +21,47 @@ const navigate = useNavigate()
       buttonsStyling: false,
     });
 
-  if (user) {
+    if (user) {
       swalWithBootstrapButtons
-      .fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
-            method: "DELETE",
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.deletedCount) {
-                swalWithBootstrapButtons.fire({
-                  title: "Deleted!",
-                  text: "Your coffee has been deleted.",
-                  icon: "success",
-                });
-                const remainingCoffee = coffees.filter((cof) => cof._id !== id);
-                setCoffees(remainingCoffee);
-              }
+        .fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "No, cancel!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
+              method: "DELETE",
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.deletedCount) {
+                  swalWithBootstrapButtons.fire({
+                    title: "Deleted!",
+                    text: "Your coffee has been deleted.",
+                    icon: "success",
+                  });
+                  const remainingCoffee = coffees.filter(
+                    (cof) => cof._id !== id
+                  );
+                  setCoffees(remainingCoffee);
+                }
+              });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire({
+              title: "Cancelled",
+              text: "Your coffee is safe 🙂",
+              icon: "error",
             });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          swalWithBootstrapButtons.fire({
-            title: "Cancelled",
-            text: "Your coffee is safe 🙂",
-            icon: "error",
-          });
-        }
-      });
-  }else{
-    navigate('/signin')
-  }
+          }
+        });
+    } else {
+      navigate("/signin");
+    }
   };
 
   return (

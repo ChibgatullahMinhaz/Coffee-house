@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../Context/AuthContext";
 import { GoogleAuthProvider } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -44,18 +45,34 @@ const SignUp = () => {
   const handleLoginWithGoogle = () => {
     creteUserWithGoogle(provider)
       .then((result) => {
-        fetch("https://coffee-server-lyart.vercel.app/thirdPartyUsers", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(result),
-        })
+        const encodedEmail = encodeURIComponent(result?.user?.email);
+        fetch(
+          `https://coffee-server-lyart.vercel.app/thirdPartyUsers?email=${encodedEmail}`
+        )
           .then((res) => res.json())
-          .then((user) => {
-            console.log(user);
+          .then((findUser) => {
+            if (!findUser) {
+              fetch("https://coffee-server-lyart.vercel.app/thirdPartyUsers", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(result),
+              })
+                .then((res) => res.json())
+                .then(() => {
+                  
+                });
+            }
           });
         navigate(location?.state || "/");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -133,7 +150,6 @@ const SignUp = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
           </div>
-         
         </div>
         {/* checkbox */}
         <label className="label">
@@ -161,7 +177,11 @@ const SignUp = () => {
         <div className="flex-1 h-px sm:w-16 "></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button onClick={handleLoginWithGoogle} aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button
+          onClick={handleLoginWithGoogle}
+          aria-label="Log in with Google"
+          className="p-3 rounded-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
