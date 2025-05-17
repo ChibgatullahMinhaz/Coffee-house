@@ -3,7 +3,8 @@ import Navbar from "../components/Navbar";
 import { Outlet, useLocation } from "react-router";
 import Footer from "../components/Footer";
 import ScrollButton from "../components/UI/ScrollButton";
-import AtomicSpinner from 'atomic-spinner'
+import AtomicSpinner from "atomic-spinner";
+import { ToastContainer } from "react-toastify";
 
 const MainLaouts = () => {
   const [routeLoading, setRouteLoading] = useState(true);
@@ -22,6 +23,7 @@ const MainLaouts = () => {
   }, [location]);
   return (
     <>
+      <ToastContainer></ToastContainer>
       <ScrollButton></ScrollButton>
       <header>
         <nav>
@@ -30,9 +32,14 @@ const MainLaouts = () => {
       </header>
 
       <main className="" id="minHight">
-        {routeLoading ? <div className="flex justify-center items-center">
-          <AtomicSpinner />
-        </div> : <Outlet></Outlet>}
+        {routeLoading ? (
+          <div className="flex justify-center items-center">
+            <AtomicSpinner />
+          </div>
+        ) : (
+            <Outlet></Outlet>
+         
+        )}
       </main>
 
       <footer>

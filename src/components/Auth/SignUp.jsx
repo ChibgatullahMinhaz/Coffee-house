@@ -25,7 +25,7 @@ const SignUp = () => {
       transition={{ duration: 0.4, ease: "easeInOut" }}
       viewport={{ once: false, amount: 0 }}
       id="create"
-      className="w-full max-w-md mx-auto my-5 bg-[#F4F3F0] rounded-box p-8 space-y-3 rounded-x"
+      className="w-full max-w-md mx-auto my-5 bg-[#F4F3F0] rounded-box p-8 space-y-3 rounded-x overflow-hidden"
     >
       <h1 className="text-2xl font-bold text-center">Create An Account</h1>
       <p className="text-center">Create with Coffee House</p>

@@ -3,7 +3,7 @@ import BackButton from './UI/BackButton';
 
 const CoffeeDetails = () => {
     return (
-        <div>
+        <div className='overflow-hidden'>
             <BackButton></BackButton>
         </div>
     );

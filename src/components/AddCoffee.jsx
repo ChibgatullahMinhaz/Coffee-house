@@ -3,12 +3,40 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { IoMdArrowBack } from "react-icons/io";
 import BackButton from "./UI/BackButton";
+import Swal from "sweetalert2";
 const AddCoffee = () => {
+  const handleCreateCoffee = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const addCoffee = Object.fromEntries(formData.entries());
+    console.log(addCoffee);
+    fetch("http://localhost:7000/coffees", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(addCoffee),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Coffee has been Added",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          form.reset();
+        }
+      });
+  };
+
   return (
-    <div id="addCoffee">
+    <div id="addCoffee" className="overflow-hidden">
       <div className="max-w-4xl mx-auto my-5 md:my-9 text-center">
         <div>
-        <BackButton></BackButton>
+          <BackButton></BackButton>
 
           <div className="bg-[#F4F3F0] w-full p-4 rounded-box">
             <motion.h1
@@ -37,7 +65,7 @@ const AddCoffee = () => {
             </motion.p>
 
             {/* add coffee form */}
-            <form className="space-y-6">
+            <form onSubmit={handleCreateCoffee} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4">
                 <motion.div
                   initial={{ x: -70, opacity: 0 }}
@@ -55,6 +83,39 @@ const AddCoffee = () => {
                     className="w-full px-4 py-3 rounded-md bg-white focus:outline-[var(--btnColor)]"
                   />
                 </motion.div>
+                <motion.div
+                  initial={{ x: 70, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  viewport={{ once: false, amount: 0 }}
+                  className="space-y-1 text-sm text-left"
+                >
+                  <label className="block">Category</label>
+                  <input
+                    type="text"
+                    required
+                    name="category"
+                    placeholder="Enter coffee category"
+                    className="w-full px-4 py-3 rounded-md bg-white focus:outline-[var(--btnColor)]"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ x: -70, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  viewport={{ once: false, amount: 0 }}
+                  className="space-y-1 text-sm text-left"
+                >
+                  <label className="block">Quantity</label>
+                  <input
+                    type="number"
+                    required
+                    name="quantity"
+                    placeholder="Enter coffee quantity"
+                    className="w-full px-4 py-3 rounded-md bg-white focus:outline-[var(--btnColor)]"
+                  />
+                </motion.div>
+
                 <motion.div
                   initial={{ x: 70, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}

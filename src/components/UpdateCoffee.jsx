@@ -5,7 +5,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import BackButton from "./UI/BackButton";
 const UpdateCoffee = () => {
   return (
-    <div id="addCoffee">
+    <div id="addCoffee" className="overflow-hidden">
       <div className="max-w-4xl mx-auto my-5 md:my-9 text-center">
         <div>
         <BackButton></BackButton>
