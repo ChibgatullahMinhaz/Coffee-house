@@ -32,7 +32,7 @@ The app simulates a basic coffee shop system where users can:
 - Connected **frontend to backend** via REST APIs
 - Clean and simple UI for managing coffee items
 - Error handling and feedback for each operation
-- Add user authentication (login/logout)
+- Add user authentication (login/logout) with Firebase + MERN
 - Improve UI/UX with animations or component libraries
 
 ---
@@ -54,15 +54,15 @@ This project was created as part of my full-stack development learning journey, 
 
 ## 🔗 Live Site / GitHub Repo
 
-- Frontend: [clint](https://github.com/ChibgatullahMinhaz/Coffee-house)
-- Backend: [GitHub link here]
-- Live Demo: [Live link if hosted]
+- Frontend: [Repo link](https://github.com/ChibgatullahMinhaz/Coffee-house)
+- Backend: [Repo link](https://github.com/ChibgatullahMinhaz/Coffee-house-server)
+- Live Demo: [Go Live](https://coffee-house-com.web.app/)
 
 ---
 
 ## 📬 Contact
 
-If you’d like to connect or share feedback, feel free to reach out via [LinkedIn] or email!
+If you’d like to connect or share feedback, feel free to reach out via [LinkedIn](https://www.linkedin.com/in/chibgatullah-minhaz-536149361/) or email!
 
 ---
 
