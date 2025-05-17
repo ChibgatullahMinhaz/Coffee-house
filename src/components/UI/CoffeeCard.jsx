@@ -34,7 +34,7 @@ const handleDelete = (id) => {
     .then((result) => {
       if (result.isConfirmed) {
       
-        fetch(`http://localhost:7000/coffees/${id}`, {
+        fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -67,12 +67,12 @@ const handleDelete = (id) => {
       viewport={{ once: false, amount: 0 }}
       className="bg-[#F5F4F1] rounded-box grid grid-cols-1  p-3 justify-center self-start sm:grid-cols-4 items-center"
     >
-        <div className="col-span-1">
+        <div >
 
       <img
         src={photo || CoffeeImg}
         alt={name || "Coffee Image"}
-        className=" w-[300px] max-h-[200px] mx-auto"
+        className=" w-sm mx-auto col-span-1"
       />
         </div>
       <div className="p-4 text-center sm:text-left col-span-2">

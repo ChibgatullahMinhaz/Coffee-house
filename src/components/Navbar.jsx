@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import Logo from "../assets/more/logo1.png";
 import { motion } from "framer-motion";
+import { AuthContext } from "../Context/AuthContext";
 
 const navLinks = [
   {
@@ -19,6 +20,15 @@ const Navbar = () => {
       {link.name}
     </NavLink>
   ));
+
+  const { user, logout } = useContext(AuthContext);
+  const handleLogout = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <motion.div
       initial={{ y: -100, opacity: 0 }}
@@ -49,7 +59,6 @@ const Navbar = () => {
           <ul
             tabIndex={0}
             className="menu  dropdown-content bg-stone-600 rounded-box z-100 mt-3 w-32 p-2"
-            
           >
             {links}
           </ul>
@@ -65,16 +74,29 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 flex gap-x-5">{links}</ul>
       </div>
       <div className="navbar-end flex gap-x-3">
-        <Link to={`/signin`}>
-          <button className="btn bg-[#E3B577] cursor-pointer text-white">
-            Login
-          </button>
-        </Link>
-        <Link to={`signUp`}>
-          <button className=" btn bg-[#E3B577] cursor-pointer text-white">
-            SingUp
-          </button>
-        </Link>
+        {user ? (
+          <>
+            <img
+              onClick={handleLogout}
+              className="w-10 h-10 rounded-full"
+              src={user?.photoURL || user.providerData[0]?.photoURL || "Photo"}
+              alt={user?.displayName || "user name"}
+            />
+          </>
+        ) : (
+          <>
+            <Link to={`/signin`}>
+              <button className="btn bg-[#E3B577] cursor-pointer text-white">
+                Login
+              </button>
+            </Link>
+            <Link to={`signUp`}>
+              <button className=" btn bg-[#E3B577] cursor-pointer text-white">
+                SingUp
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </motion.div>
   );

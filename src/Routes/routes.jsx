@@ -7,6 +7,7 @@ import Signin from "../components/Auth/Signin";
 import SignUp from "../components/Auth/SignUp";
 import UpdateCoffee from "../components/UpdateCoffee";
 import CoffeeDetails from "../components/CoffeeDetails";
+import PrivateRoute from "./PrivetRoutes";
 
 export const routes = createBrowserRouter([
   {
@@ -19,18 +20,22 @@ export const routes = createBrowserRouter([
       },
       {
         path: "addCoffee",
-        element: <AddCoffee></AddCoffee>,
+        element: (
+          <PrivateRoute>
+            <AddCoffee></AddCoffee>
+          </PrivateRoute>
+        ),
       },
       {
         path: "updateCoffee/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:7000/coffees/${params.id}`),
+          fetch(`https://coffee-server-lyart.vercel.app/coffees/${params.id}`),
         element: <UpdateCoffee></UpdateCoffee>,
       },
       {
         path: "coffeeDetails/:id",
-          loader: ({ params }) =>
-          fetch(`http://localhost:7000/coffees/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://coffee-server-lyart.vercel.app/coffees/${params.id}`),
         element: <CoffeeDetails></CoffeeDetails>,
       },
       {

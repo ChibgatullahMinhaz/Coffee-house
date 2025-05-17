@@ -28,7 +28,7 @@ const navigate = useNavigate();
     const formData = new FormData(form);
     const updatedDoc = Object.fromEntries(formData.entries());
     console.log(updatedDoc);
-    fetch(`http://localhost:7000/coffees/${id}`, {
+    fetch(`https://coffee-server-lyart.vercel.app/coffees/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

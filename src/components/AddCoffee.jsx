@@ -11,7 +11,7 @@ const AddCoffee = () => {
     const formData = new FormData(form);
     const addCoffee = Object.fromEntries(formData.entries());
     console.log(addCoffee);
-    fetch("http://localhost:7000/coffees", {
+    fetch("https://coffee-server-lyart.vercel.app/coffees", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(addCoffee),

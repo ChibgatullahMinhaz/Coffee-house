@@ -44,9 +44,26 @@ const Signin = () => {
   const handleLoginWithGoogle = () => {
     creteUserWithGoogle(provider)
       .then((result) => {
+
+
+        fetch('https://coffee-server-lyart.vercel.app/thirdPartyUsers',{
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          }
+          ,
+          body:JSON.stringify(result)
+        }).then(res => res.json())
+        .then(user => {
+          console.log(user);
+        })
+
+
         navigate(location?.state || "/");
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   // toggle password
@@ -71,6 +88,7 @@ const Signin = () => {
             Email
           </label>
           <input
+          ref={emailRef}
             type="email"
             required
             name="email"
@@ -118,7 +136,7 @@ const Signin = () => {
         <div className="flex-1 h-px sm:w-16 "></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button onClick={handleLoginWithGoogle} aria-label="Log in with Google" className="p-3 rounded-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import ScrollButton from "../components/UI/ScrollButton";
 import AtomicSpinner from "atomic-spinner";
 import { ToastContainer } from "react-toastify";
+import Loader from "../components/UI/Loader";
 
 const MainLaouts = () => {
   const [routeLoading, setRouteLoading] = useState(true);
@@ -33,9 +34,7 @@ const MainLaouts = () => {
 
       <main className="" id="minHight">
         {routeLoading ? (
-          <div className="flex justify-center items-center">
-            <AtomicSpinner />
-          </div>
+         <Loader></Loader>
         ) : (
             <Outlet></Outlet>
          

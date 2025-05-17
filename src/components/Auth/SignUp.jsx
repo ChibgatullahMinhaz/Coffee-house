@@ -44,11 +44,21 @@ const SignUp = () => {
   const handleLoginWithGoogle = () => {
     creteUserWithGoogle(provider)
       .then((result) => {
-        // toast.success("User Login Successfully");
+        fetch("https://coffee-server-lyart.vercel.app/thirdPartyUsers", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(result),
+        })
+          .then((res) => res.json())
+          .then((user) => {
+            console.log(user);
+          });
         navigate(location?.state || "/");
       })
       .catch((error) => {
-        // toast.warning(error);
+        console.log(error);
       });
   };
 
@@ -123,11 +133,7 @@ const SignUp = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
           </div>
-          <div className="flex justify-end text-xs">
-            <Link to={`/resetPassword`} rel="noopener noreferrer">
-              Forgot Password?
-            </Link>
-          </div>
+         
         </div>
         {/* checkbox */}
         <label className="label">
@@ -155,7 +161,7 @@ const SignUp = () => {
         <div className="flex-1 h-px sm:w-16 "></div>
       </div>
       <div className="flex justify-center space-x-4">
-        <button aria-label="Log in with Google" className="p-3 rounded-sm">
+        <button onClick={handleLoginWithGoogle} aria-label="Log in with Google" className="p-3 rounded-sm">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
