@@ -22,14 +22,32 @@ const Signin = () => {
     const { email, password } = Object.fromEntries(formData.entries());
     userLogin(email, password)
       .then((result) => {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate(location?.state || "/");
+        const userInfo = {
+          email,
+          isOnline: true,
+          lastSignInTime: result?.user?.metadata?.lastSignInTime,
+        };
+
+        fetch("https://coffee-server-lyart.vercel.app/users", {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your Successfully LogIn.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate(location?.state || "/");
+            }
+          });
       })
       .catch((error) => {
         const errorcode = error.code;
@@ -52,19 +70,32 @@ const Signin = () => {
   const handleLoginWithGoogle = () => {
     creteUserWithGoogle(provider)
       .then((result) => {
-        fetch("https://coffee-server-lyart.vercel.app/thirdPartyUsers", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(result),
-        })
+        const encodedEmail = encodeURIComponent(result?.user?.email);
+        fetch(
+          `https://coffee-server-lyart.vercel.app/thirdPartyUsers?email=${encodedEmail}`
+        )
           .then((res) => res.json())
-          .then((user) => {
-            console.log(user);
+          .then((findUser) => {
+            if (!findUser) {
+              fetch("https://coffee-server-lyart.vercel.app/thirdPartyUsers", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(result),
+              })
+                .then((res) => res.json())
+                .then(() => {});
+            }
           });
-
         navigate(location?.state || "/");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.log(error);

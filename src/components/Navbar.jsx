@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import Logo from "../assets/more/logo1.png";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Context/AuthContext";
+import { auth } from "../Firebase/Firebase.init";
 
 const navLinks = [
   {
@@ -22,12 +23,22 @@ const Navbar = () => {
   ));
 
   const { user, logout } = useContext(AuthContext);
-  const handleLogout = () => {
-    logout()
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
+  const handleLogout = async () => {
+    if (user) {
+      await fetch("https://coffee-server-lyart.vercel.app/users", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: user.email,
+          isOnline: false,
+          lastSignInTime: user?.metadata?.lastSignInTime,
+        }),
+
       });
+
+    }
+
+    await logout();
   };
   return (
     <motion.div

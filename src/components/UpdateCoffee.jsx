@@ -51,20 +51,19 @@ const UpdateCoffee = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              navigate("/");
-              form.reset();
+          
             } else {
               toast.warn("Please Change something!");
             }
           });
-        Swal.fire("Saved!", "", "success");
+       
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
     });
   };
 
-  
+
   return (
     <div id="addCoffee" className="overflow-hidden">
       <div className="max-w-4xl mx-auto my-5 md:my-9 text-center">

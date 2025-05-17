@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../Context/AuthContext";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,27 +17,52 @@ const SignUp = () => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const { email, password, ...remainingInfo } = Object.fromEntries(
+    const checked = e.target.terms.checked;
+    const { email, password, name, photo, terms } = Object.fromEntries(
       formData.entries()
     );
 
-    const checked = e.target.terms.checked;
     if (!checked) {
-      // toast.warn("please Accept our terms and conditions");
+      toast.warn("please Accept our terms and conditions");
       return;
     }
 
     createUser(email, password)
       .then((result) => {
-        // updateProfile(result.user, {
-        //   displayName: name,
-        //   photoURL: photo,
-        // });
-        // toast.success("Account Create Successfully");
-        navigate("/");
+        const userInfo = {
+          email,
+          password,
+          name,
+          photo,
+          terms,
+          creationTime: result?.user?.metadata?.creationTime,
+          lastSignInTime: result?.user?.metadata?.lastSignInTime,
+          phoneNumber: result?.user?.phoneNumber,
+        };
+
+        fetch("https://coffee-server-lyart.vercel.app/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your Account Created Successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate(location?.state || "/");
+            }
+          });
       })
       .catch((error) => {
-        // toast.warning("You have Already an Account! Please Login");
+        toast.warning("You have Already an Account! Please Login");
       });
   };
 
@@ -60,9 +86,7 @@ const SignUp = () => {
                 body: JSON.stringify(result),
               })
                 .then((res) => res.json())
-                .then(() => {
-                  
-                });
+                .then(() => {});
             }
           });
         navigate(location?.state || "/");
