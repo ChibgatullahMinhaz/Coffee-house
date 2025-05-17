@@ -54,7 +54,7 @@ This project was created as part of my full-stack development learning journey, 
 
 ## 🔗 Live Site / GitHub Repo
 
-- Frontend: [GitHub link here]
+- Frontend: [clint](https://github.com/ChibgatullahMinhaz/Coffee-house)
 - Backend: [GitHub link here]
 - Live Demo: [Live link if hosted]
 
