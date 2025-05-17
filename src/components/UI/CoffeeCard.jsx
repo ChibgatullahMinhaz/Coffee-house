@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+
+
 const CoffeeCard = ({ coffee,coffees, setCoffees }) => {
   const { price, name, _id, photo, barista } = coffee;
 
