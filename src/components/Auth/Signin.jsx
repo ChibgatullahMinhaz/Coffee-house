@@ -1,19 +1,59 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { AuthContext } from "../../Context/AuthContext";
+import { GoogleAuthProvider } from "firebase/auth";
 const Signin = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const emailRef = useRef();
+  const { creteUserWithGoogle, userLogin } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const { email, password } = Object.fromEntries(formData.entries());
+    userLogin(email, password)
+      .then((result) => {
+        // toast.success("login successful");
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        const errorcode = error.code;
+        if (errorcode == "auth/user-not-found") {
+          // toast.warning("Invalid User ! please Create An Account");
+        } else if (errorcode === "auth/wrong-password") {
+          // toast.warning("Wrong Password");
+        } else if (errorcode === "auth/invalid-credential") {
+          // toast.warn("Invalid email or password");
+        }
+      });
   };
 
+  const handleReset = () => {
+    navigate("/resetPassword", { state: { email } });
+  };
+
+  // login with google
+  const provider = new GoogleAuthProvider();
+  const handleLoginWithGoogle = () => {
+    creteUserWithGoogle(provider)
+      .then((result) => {
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {});
+  };
+
+  // toggle password
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <motion.div
       initial={{ y: 50, opacity: 0 }}

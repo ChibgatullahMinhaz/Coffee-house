@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../../Context/AuthContext";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { createUser, creteUserWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,9 +18,41 @@ const SignUp = () => {
     const { email, password, ...remainingInfo } = Object.fromEntries(
       formData.entries()
     );
-    console.log(email, password, remainingInfo);
+
+    const checked = e.target.terms.checked;
+    if (!checked) {
+      // toast.warn("please Accept our terms and conditions");
+      return;
+    }
+
+    createUser(email, password)
+      .then((result) => {
+        // updateProfile(result.user, {
+        //   displayName: name,
+        //   photoURL: photo,
+        // });
+        // toast.success("Account Create Successfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        // toast.warning("You have Already an Account! Please Login");
+      });
   };
 
+  // login with google
+  const provider = new GoogleAuthProvider();
+  const handleLoginWithGoogle = () => {
+    creteUserWithGoogle(provider)
+      .then((result) => {
+        // toast.success("User Login Successfully");
+        navigate(location?.state || "/");
+      })
+      .catch((error) => {
+        // toast.warning(error);
+      });
+  };
+
+  // toggle password
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
