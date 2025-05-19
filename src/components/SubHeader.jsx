@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const SubHeader = () => {
   return (
     <div className="bg-[#ECEAE3] overflow-hidden">
-      <div className="max-w-9/12 mx-auto grid grid-cols-1 justify-center items-center md:grid-cols-3 lg:grid-cols-4 ">
+      <div className="max-w-9/12 mx-auto grid grid-cols-1 md:text-left text-center content-center justify-center items-center md:grid-cols-3 lg:grid-cols-4 ">
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -16,15 +16,18 @@ const SubHeader = () => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="p-3"
         >
-          <img
-            src={Aroma}
-            alt="You will definitely be a fan of the design & aroma of your coffee"
-          />
+          <div className="flex justify-center  sm:justify-start">
+            <img
+              src={Aroma}
+              alt="You will definitely be a fan of the design & aroma of your coffee"
+            />
+          </div>
           <h1 className="text-2xl">Awesome Aroma</h1>
           <p>
             You will definitely be a fan of the design & aroma of your coffee
           </p>
         </motion.div>
+
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -32,10 +35,12 @@ const SubHeader = () => {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="p-3"
         >
-          <img
-            src={Quality}
-            alt="We served the coffee to you maintaining the best quality"
-          />
+          <div className="flex justify-center sm:justify-start">
+            <img
+              src={Quality}
+              alt="We served the coffee to you maintaining the best quality"
+            />
+          </div>
           <h1 className="text-2xl">High Quality</h1>
           <p>We served the coffee to you maintaining the best quality </p>
         </motion.div>
@@ -46,10 +51,12 @@ const SubHeader = () => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="p-3"
         >
-          <img
-            src={Grades}
-            alt="The coffee is made of the green coffee beans which you will love"
-          />
+          <div className="flex justify-center sm:justify-start">
+            <img
+              src={Grades}
+              alt="The coffee is made of the green coffee beans which you will love"
+            />
+          </div>
           <h1 className="text-2xl">Pure Grades</h1>
           <p>
             The coffee is made of the green coffee beans which you will love{" "}
@@ -62,10 +69,12 @@ const SubHeader = () => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="p-3"
         >
-          <img
-            src={Rosting}
-            alt="Your coffee is brewed by first roasting the green coffee beans"
-          />
+          <div className="flex justify-center sm:justify-start">
+            <img
+              src={Rosting}
+              alt="Your coffee is brewed by first roasting the green coffee beans"
+            />
+          </div>
           <h1 className="text-2xl">Proper Roasting</h1>
           <p>Your coffee is brewed by first roasting the green coffee beans </p>
         </motion.div>

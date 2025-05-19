@@ -70,7 +70,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeIn" }}
       viewport={{ once: false, amount: 0 }}
-      className="bg-[#F5F4F1] rounded-box grid grid-cols-1  p-3 justify-center self-start sm:grid-cols-4 items-center"
+      className="bg-[#F5F4F1] rounded-box grid grid-cols-1  p-3 justify-center sm:grid-cols-4 items-center"
     >
       <div>
         <img

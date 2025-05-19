@@ -46,17 +46,20 @@ const OurProductSection = () => {
         </Link>
 
         {/* showing coffees */}
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 max-w-11/12 mx-auto py-6 space-y-4 lg:gap-4">
-          
+        <div className="grid grid-cols-1  sm:grid-cols-1 lg:grid-cols-2 max-w-11/12 mx-auto py-6 space-y-4 lg:gap-4">
+         
 
-          {allCoffees.map((coffee, idx) => (
+          {allCoffees.length ==0 ?<Loader></Loader> :
+          allCoffees.map((coffee, idx) => (
             <CoffeeCard
               key={idx}
               setCoffees={setCoffees}
               coffee={coffee}
               coffees={coffees}
             ></CoffeeCard>
-          ))}
+          ))
+          }
+
           {(allCoffees.length == 0
            && !loading) &&
             <NoCoffeeFound />}
